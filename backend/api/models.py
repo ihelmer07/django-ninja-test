@@ -8,11 +8,19 @@ class Customer(models.Model):
 
     name = models.CharField(_("Name"), max_length=50)
 
+    def __str__(self):
+        """Str Method override."""
+        return self.name
+
 
 class City(models.Model):
     """Model with simple info."""
 
     city = models.CharField(_("City"), max_length=3)
+
+    def __str__(self):
+        """Str Method override."""
+        return self.city
 
 
 class Order(models.Model):
@@ -20,3 +28,7 @@ class Order(models.Model):
 
     city = models.ForeignKey(City, verbose_name=_("Name"), on_delete=models.CASCADE)
     name = models.ManyToManyField(Customer, verbose_name=_("Customers"))
+
+    def __str__(self):
+        """Str Method override."""
+        return f"Order {self.pk} for {self.city.name}"
