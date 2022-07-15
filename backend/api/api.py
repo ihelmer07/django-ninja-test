@@ -63,7 +63,10 @@ def create_order(request, payload: OrderPostSchema):
 
     when those pks are known to exist.
     """
-    obj = Order.objects.create(**payload.dict())
+    data = payload.dict()
+    names = data.pop('name')
+    obj = Order.objects.create(**data) 
+    obj.name.add(*names)
     return {"id": obj.id}
 
 
