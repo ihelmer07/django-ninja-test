@@ -22,7 +22,7 @@ class TestNinjaApi(TestCase):
             )
             self.assertEqual(response.status_code, 200)
         except AttributeError:
-            pass
+            self.fail("ninja m2m failed")
 
     def test_m2m_drf(self):
         response = self.client.post("/drf-api/orders", data=self.payload, content_type="application/json", follow=True)
